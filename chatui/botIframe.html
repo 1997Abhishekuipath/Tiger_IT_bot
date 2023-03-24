@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body style="margin: 0px;">
+    <iframe id="bot_frame"src="https://itmatec.hitachi-systems.co.in/chat/index.html?"  style="
+    background: black;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    width: 404px;
+    height: 603px;
+    border-radius: 5px;
+    border-width: 0px;
+    border: black;
+    ">
+    </iframe>
+    
+</body>
+<script>
+   document.addEventListener("DOMContentLoaded", function(event) { 
+    var hm_web_uid = new URL(window.location.href).searchParams.get("sarathi_botid");
+    var it_web_uid = new URL(window.location.href).searchParams.get("itmatec_botid");
+    var web_user = new URL(window.location.href).searchParams.get("web_user");
+ console.log("user", web_user)
+	   var bot_name = new URL(window.location.href).searchParams.get("bot_name");   
+        let rasa_nlp = true 
+        if (!rasa_nlp){
+        document.getElementById('bot_frame').src = "https://sarathi.hitachi-systems-mc.com/chatwidget/bot/"+hm_web_uid+'/'+web_user;
+        } 
+        else{
+            document.getElementById('bot_frame').src = "https://itmatec.hitachi-systems.co.in/chat/index.html?web_uid="+it_web_uid+'&bot_name='+bot_name+'&user='+web_user;
+        }
+    });
+
+  //  https://sarathi.hitachi-systems-mc.com/chatwidget/bot/dQddiiSSs2OKcBgiET9Y3t83nl29BrcC/%7B%22user_identity%22:%22821557894164930%22,%22user_name%22:%22mvdgappcvisor01.ifcmumbai.dhani%22%7D
+</script>
+</html>

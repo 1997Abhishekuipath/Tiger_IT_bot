@@ -1,0 +1,458 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="./chatstyle.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"
+        integrity="sha512-IsoGB9P1Kjw962zrslxT91OfoKkAnlBfQDdh5HwFvOxwJ8xGV6MuDeAli4TkEMiUqhJVkvpxJBsIS14bSERgxA=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js">
+    </script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.0/mustache.min.js"
+        integrity="sha512-ZtynsaJmQRo6Ru0RHAPHnMfmTCLSTRcAoxbl5csw47H9EbEZWpns3URyVNgAvj6KQvEM6ysjTQZ3jj61go0NsQ=="
+        crossorigin="anonymous"></script>
+    <script src='./script.js'></script>
+</head>
+
+<body>
+    <div id="body">
+
+        <div id="chat-circle">
+            <div id="chat-overlay" title="Hi HSI BOT" class="visible"></div>
+            <!-- <i class="material-icons" id="textsms-icon">smart_toy</i> -->
+            <img src="data:image/png;base64,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">
+            <!-- <img src="data:image/png;base64,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"> -->
+            <!-- <img src="data:image/png;base64,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"> -->
+            <span id="chat-with-text"></span>
+        </div>
+        <div class="chat-box">
+            <div class="chat-box-header">
+                <img src="./jarvis.gif" height="67px"/>
+                <img src="./hsi-bot-logo-v1.png" height="40px" style="margin-left: -40px"/>
+		<i class="material-icons" id="reload">replay_circle_filled</i>
+                <span class="chat-box-toggle" id="chat-box-minimize" title="Minimize Chat"><i
+                        class="material-icons"  id="close">cancel</i></span>
+            </div>
+            <div class="chat-box-body">
+                <div class="chat-box-overlay"></div>
+                <div class="chat-logs">
+                    
+                </div>
+                <!--chat-log -->
+            </div>
+            <!-- <div class="ticontainer">
+            <div class="tiblock">
+              <div class="tidot"></div>
+              <div class="tidot"></div>
+              <div class="tidot"></div>
+            </div>
+          </div> -->
+            <div class="chat-input">
+                <audio id="response_audio_id" controls style="display: none;">
+                    <source id="response_audio_source_id" src="" type="audio/mp3">
+                </audio>
+
+                <form>
+                    <input type="text" id="chat-input" placeholder="Send a message...">
+                    <button type="submit" class="chat-submit" id="chat-submit">
+                        <i class="material-icons">send</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script id="template_typing" type="x-tmpl-mustache">
+        <div class="loading">typing </div>
+    </script>
+    <script id="template_text" type="x-tmpl-mustache">
+        <span id="text_input">
+                        {{{text}}} </span>
+                </script>
+
+                <script id="template_intent" type="x-tmpl-mustache">
+                    <span id="text_intent">
+                                  Confidence  {{{intent}}} </span>
+                            </script>
+
+    <script id="template_quick_reply_replies" type="x-tmpl-mustache">
+        <span id="quick_replies" class="quick_replies_class" onclick="window.__bot.process_input('{{reply_slug}}','{{reply_display_text}}')">{{ reply_display_text }}</br></span>
+            </script>
+    <script id="template_quick_reply" type="x-tmpl-mustache">
+        <div style="line-height: 40px;" class="replies_container_div">
+                    {{{rendered_replies}}} </div>
+            </script>
+    <script id="template_links" type="x-tmpl-mustache">
+         <a href="{{link.link_url}}" target="_blank" style="color: #371ce1;
+         font-style: italic;
+         font-weight: bold;">{{link.link_display_name}} </a> </br>
+            </script>
+    <script id="template_chat" type="x-tmpl-mustache">
+        
+        <div id="cm-msg-{{INDEX}}" class="chat-msg {{type}}">
+		    <span class="msg-avatar" style={{{style}}}>
+                        {{{profile_image}}} </span>
+		    <div class={{{class_name}}}>
+                        {{{msg}}} </div>
+                </div>
+            </script>
+    <script id="voice_recognizing" type="x-tmpl-mustache">
+        <div class="loading"><br/>Recognizing</div>
+            </script>
+    <script id="template_form_container" type="x-tmpl-mustache">
+        <span id="text_input">
+                    {{{ form }}} </span>
+            </script>
+    <script id="template_form" type="x-tmpl-mustache">
+        <form class="chat_form" id="{{ name }}" onkeydown="return event.key != 'Enter';">
+                    {{{ fields }}}
+		     <i class="material-icons"  id="info">info <span class="info-text">THIS IS INFO</span></i>
+		               <div class="title">
+
+            <div class="tooltip">
+              <div class="tooltip-spacing">
+                <div class="tooltip-bg1"></div>
+                <div class="tooltip-bg2"></div>
+                <div class="tooltip-text"><i class="material-icons"  id="info">info <span class="info-text">THIS IS INFO</span></i></div>
+              </div>
+            </div>
+            <svg class="popup-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 130" height="60" width="275">
+	    <defs>
+               <linearGradient id="grad1" x1="100%" y1="0%" x2="0%" y2="100%">
+               <stop offset="0%" style="stop-color:#333b66;stop-opacity:1"></stop>
+               <stop offset="100%" style="stop-color:#01C6FE ;stop-opacity:1"></stop>
+             </linearGradient>
+           </defs>
+              <path d="M36.5 12.695c15.9-2.4 32.556-4.284 82.977-3.815 79.67.74 121.785.26 145.294 5.51 18.483 4.13 34.333 11.696 33.382 32.11l-1.696 36.39c-1.01 21.68-11.678 29.377-21.934 30.838-14.884 2.12-29.72 3.52-54.512-.848C232.522 118.263 233.5 129 233.5 129s-1.992-7.686-32.218-14c-17.933-5.043-118.204 3.687-163.51-2.544-21.317-2.932-33.706-8.26-34.228-27.022L2.272 39.717c-.46-16.58 12.34-23.718 34.23-27.022z" fill="url(#grad1)" stroke="none" />
+            </svg>
+            <svg class="popup-outline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 130" height="60" width="275">
+              <g stroke-width="2" stroke-linecap="round">
+                <path class="popup-outline-left" d="M233.5 129s-1.992-7.686-32.218-14c-17.933-5.043-118.204 3.687-163.51-2.544-21.317-2.932-33.706-8.26-34.228-27.022L2.272 39.717c-.46-16.58 12.34-23.718 34.23-27.022 15.897-2.4 32.554-4.284 82.975-3.815" fill="none" stroke="none" />
+                <path class="popup-outline-right" d="M119.477 8.88c79.67.74 121.785.26 145.294 5.51 18.483 4.13 34.333 11.696 33.382 32.11l-1.696 36.39c-1.01 21.68-11.678 29.377-21.934 30.838-14.884 2.12-29.72 3.52-54.512-.848C232.522 118.263 233.5 129 233.5 129" fill="none" stroke="none" />
+              </g>
+            </svg>
+            <div class="popup-text">
+	    Resource Portal -> Settings -><br> User Profile -> EmployeeUID
+            </div>
+          </div>
+                    <div class="invalid-feedback text-center d-block" id="error_message_{{ name }}_server"></div>
+                    <button type="button" class="btn chat_form_button" onclick="window.__bot.chat_form_action('{{ name }}', 'submit')">Send</button>
+                    <button type="button" class="btn chat_form_button" onclick="window.__bot.chat_form_action('{{ name }}', 'cancel')">Cancel</button>
+                </form>
+            </script>
+    <script id="template_form_field_text" type="x-tmpl-mustache">
+        <div class="form-group">
+            <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important; color:#f0ad4e;">{{field.display_name}}</label>
+            <input type="text" class="form-control" name="{{ field.name }}" value="{{field.value}}" {{ field.required }}>
+                <div class="invalid-feedback" id="error_message_{{ form_name }}_{{ field.name }}"></div>
+            </div>
+        </script>
+    <script id="template_form_field_email" type="x-tmpl-mustache">
+        <div class="form-group">
+            <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important;color:#f0ad4e;">{{field.display_name}}</label>
+            <input type="email" class="form-control" name="{{ field.name }}" {{ field.required }}>
+                <div class="invalid-feedback" id="error_message_{{ form_name }}_{{ field.name }}"></div>
+            </div>
+        </script>
+    <script id="template_form_field_textarea" type="x-tmpl-mustache">
+        <div class="form-group">
+            <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important;color:#f0ad4e;">{{field.display_name}}</label>
+            <textarea rows="{{ field.rows }}" class="form-control" name="{{ field.name }}" {{ field.required }}></textarea>
+        </div>
+    </script>
+    <script id="template_form_field_password" type="x-tmpl-mustache">
+        <div class="form-group">
+            <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important;color:#f0ad4e;">{{field.display_name}}</label>
+            <input type="text" class="form-control field_password" name="{{ field.name }}" {{ field.required }} autocomplete="off">
+                <div class="invalid-feedback" id="error_message_{{ form_name }}_{{ field.name }}"></div>
+            </div>
+        </script>
+    <script id="template_form_field_select" type="x-tmpl-mustache">
+        <div class="form-group">
+                <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important;color:#f0ad4e;">{{field.display_name}}</label>
+                <select class="form-control" name="{{ field.name }}" {{ field.required }}>
+                    {{{ options }}} </select>
+            </div>
+        </script>
+    <script id="template_form_field_select_option" type="x-tmpl-mustache">
+        <option value="{{ option.value }}">{{option.display_value}} </option>
+            </script>
+    <script id="template_form_field_file_pdf" type="x-tmpl-mustache">
+            <div class="form-group">
+                <button class="btn" id="button_form_file" onclick="window.__bot.chat_form_upload_form_file()" type="button">Choose File</button>
+                <input type="file" class="form-control" name="{{ field.name }}" id="{{ form_name }}_form_file" accept="application/pdf" {{ field.required }} style="float: right;">
+                <div class="invalid-feedback" id="error_message_{{ form_name }}_{{ field.name }}" style="float: left;"></div>
+            </div>
+            <br>
+            <br>
+    
+        </script>
+    <script id="template_form_field_calendar" type="x-tmpl-mustache">
+            <div class="form-group">
+                <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important; color:#f0ad4e;">Date</label>
+                <input type="date" class="form-control" name="{{ field.name }}" {{ field.required }}>
+                    <div class="invalid-feedback" id="error_message_{{ form_name }}_{{ field.name }}"></div>
+                </div>
+            </script>
+
+    <script id="template_star_rating" type="x-tmpl-mustache">
+                <div class="rate">
+                    <input type="radio" id="star5" name="rate" value="5" onclick="window.__bot.radioClick(5)" />
+                    <label for="star5" title="Great" >5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" onclick="window.__bot.radioClick(4)" />
+                    <label for="star4" title="Good">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" onclick="window.__bot.radioClick(3)" />
+                    <label for="star3" title="Average">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" onclick="window.__bot.radioClick(2)" />
+                    <label for="star2" title="Below average">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" onclick="window.__bot.radioClick(1)" />
+                    <label for="star1" title="Unsatisfactory">1 star</label>
+                </div>
+            </script>
+
+    <script>
+        $(document).ready(function () {
+
+            window.__bot = chatbot();
+            window.__bot.show_typing_indicator();
+            window.__bot.userVerification();
+            window.__bot.INDEX = 0;
+
+            $("#close").click(function(){
+            console.log("The icon was clicked.",window.__bot.Id);
+            a = window.__bot.Id;
+	    window.__bot.Id=[];
+//          window.__bot.INDEX = 0;
+            window.__bot.Id[0]=a[0]
+	    window.__bot.Id[1]=a[1]
+            window.__bot.Id[2]=a[2]
+            location.reload();
+
+            });
+
+            $("#reload").click(function(){
+//            $("#chatbot-chat-frame").contentWindow.location.reload();
+	//	                console.log('dsdsdsdsd',$("#chatbot-chat-frame"))
+             //location.reload();
+            $(".chat-logs").children().remove();
+            window.__bot.userVerification();
+            //console.log("The icon was clicked.",window.__bot.Id);
+            //window.__bot.Id=[]i
+            //console.log(`#cm-msg-${window.__bot.Id[0]}`);
+	    res = $(`#cm-msg-${window.__bot.Id[0]}`).find('#text_input').text()
+            res = res.trim()
+            //console.log('hello-res',res)
+            //let result = `res`.includes("Hi I can help you with following");		  
+            //console.log(result,'dsds')		    
+            //if(res === "Hi I can help you with following"){
+	//	    console.log('inside-iffffff')
+	//	    $(".chat-logs").children(":not(#cm-msg-"+13+",#cm-msg-"+12+",#cm-msg-"+11+")").remove();
+
+	  //  }
+	    //else{
+           // $(".chat-logs").children(":not(#cm-msg-"+window.__bot.Id[1]+",#cm-msg-"+window.__bot.Id[2]+",#cm-msg-"+window.__bot.Id[0]+")").remove();
+	    //}	    
+            console.log('hello----->',":not(#cm-msg-"+window.__bot.Id[1]+",#cm-msg-"+window.__bot.Id[2]+",#cm-msg-"+window.__bot.Id[0]+")")
+	    });
+
+            function GetID(){
+             console.log('helllo got id')
+	    }        
+            $("#chat-submit").click(function (e) {
+                console.log("message submitted");
+                e.preventDefault();
+                var msg = $("#chat-input").val();
+                if (msg.trim() == "" || window.__bot.awaiting_response) {
+                    return false;
+                }
+                window.__bot.process_input(msg, undefined);
+            });
+            $(document).delegate(".chat-btn", "click", function () {
+                var value = $(this).attr("chat-value");
+                var name = $(this).html();
+                $("#chat-input").attr("disabled", false);
+                window.__bot.generate_message(name, "self");
+            });
+
+            window.__bot.chat_form_hide = function (element_form_jquery) {
+                if (element_form_jquery) {
+                    element_form_jquery.closest('.chat-msg').remove();
+                } else {
+                    $(".chat_form").closest('.chat-msg').remove();
+                }
+            }
+            $("#chat-circle").click(function () {
+                $("#chat-circle").addClass("disabled_element");
+                $("#chat-circle").css("display", 'None !important');
+                if (window.__bot.host_parent) {
+                    try {
+                        window.parent.postMessage("maximized", window.__bot.host_parent);
+                        console.log(window.parent.postMessage("maximized", window.__bot.host_parent))
+                    } catch (error) {
+                        console.log("Error whole maximized postmessage");
+                    }
+                }
+                window.__bot.toggle_chatui();
+                $('.chat-msg').remove();
+                window.__bot.userVerification();
+                $("#chat-circle").removeClass("disabled_element");
+
+            });
+
+            $("#chat-box-minimize").click(function () {
+                if (window.__bot.host_parent) {
+                    try {
+                        window.parent.postMessage("minimized", window.__bot.host_parent);
+                    } catch (error) {
+                        console.log("Error whole minimized postmessage");
+                    }
+                }
+                window.__bot.toggle_chatui();
+            });
+
+            window.__bot.chat_form_upload_form_file = function () {
+                console.log("file upload clicked")
+                $("#file_upload_form_file").trigger('click');
+            }
+
+
+            window.__bot.chat_form_action = function (form_name, action) {
+                var element_form = document.getElementById(form_name);
+                var element_form_jquery = $("#" + form_name);
+                if (element_form) {
+                    document.getElementById("error_message_" + form_name + "_server").innerHTML = "";
+                    if (action == "cancel") {
+                        window.__bot.chat_form_hide(element_form_jquery);
+                        return;
+                    } else if (action == "submit") {
+                        var data = {};
+                        var file_data = false;
+                        var request_headers = {
+                            "Content-Type": "application/json"
+                        };
+                        for (var i = 0; i < element_form.elements.length; i++) {
+                            var element = element_form.elements[i];
+                            console.log("element11", element, element.name);
+                            if (element.name == "form_file") {
+                                var file = element.files[0];
+                                // console.log(" uploadded ",file)
+                                file_data = new FormData()
+                                file_data.append("file", file);
+                                console.log("appended file", file_data.get('file'))
+                                request_headers["Content-Type"] = ""
+                                console.log(file.type)
+                                if (!file) {
+                                    delete file_data
+
+                                    document.getElementById("error_message_" + form_name + "_" + element
+                                        .name).innerHTML = "Please upload a valid PDF file.";
+                                    document.getElementById(form_name + "_" + element.name).classList
+                                        .add("is-invalid");
+                                    return;
+                                } else {
+                                    document.getElementById("error_message_" + form_name + "_" + element
+                                        .name).innerHTML = "";
+                                    document.getElementById(form_name + "_" + element.name).classList
+                                        .remove("is-invalid");
+                                }
+
+                            } else if (element.required && !element.value.trim()) {
+                                document.getElementById("error_message_" + form_name + "_" + element.name)
+                                    .innerHTML = "Please enter " + element.previousElementSibling.innerHTML
+                                        .trim() + ".";
+                                element.classList.add("is-invalid");
+                            } else if (element.type == "email" && !element.checkValidity()) {
+                                document.getElementById("error_message_" + form_name + "_" + element
+                                    .name).innerHTML = "Please enter a valid " + element
+                                        .previousElementSibling.innerHTML.trim() + ".";
+                                element.classList.add("is-invalid");
+                            } else {
+                                element.classList.remove("is-invalid");
+                            }
+                        }
+                        if (!element_form.checkValidity()) {
+                            return;
+                        }
+                    }
+                }
+                var form_data = {};
+
+                $(".chat_form_button").attr("disabled", true);
+                element_form_jquery.serializeArray().map(function (x) {
+                    form_data[x.name] = x.value;
+                });
+                if (form_name == 'ticketUpdate_form') {
+                    let i = 0
+                    for (i = 0; i <= 4; i++) {
+                        form_data[element_form_jquery[0].elements[i].name] = element_form_jquery[0].elements[i].value;
+                    }
+                }
+                console.log(form_data);
+                data.web_uid = window.__bot.web_uid;
+                data.form_data = form_data;
+                data.form_name = form_name;
+                data.web_user = JSON.stringify(window.__bot.web_user)
+                data.web_session = window.__bot.session_id ? window.__bot.session_id : ''
+                data.user_verified = window.__bot.user_verified
+                data.user_email = window.__bot.user_email ? window.__bot.user_email : ''
+                data.website_user = window.__bot.website_user;
+                // console.log("file_data", file_data)
+                let temp = file_data ? file_data.append('data', JSON.stringify(data)) : null
+                var request_body = file_data ? file_data : JSON.stringify(data)
+                // console.log(request_body, file_data)
+
+                window.__bot.disable_reset_chat();
+                window.__bot.awaiting_response = true;
+                if (form_name == 'add_calendar') {
+                    selected_date = "selected date is " + form_data.calendar_text
+                    window.__bot.process_input(selected_date, undefined);
+                } else 
+	           {
+	            console.log('form-nameeeee',form_name)			       
+                    fetch(window.__bot.server_host_http + window.__bot.url_prefix + "submit_form", {
+                        method: "POST",
+                        contentType: false,
+                        processData: false,
+                        // headers: request_headers,
+                        body: request_body
+                    }).then(function (response) {
+                        console.log(response);
+                        return response.json()
+                    }).then(function (response_data) {
+                        console.log(response_data);
+                        if (response_data.error_msg) {
+                            document.getElementById("error_message_" + form_name + "_server")
+                                .innerHTML = response_data.error_msg;
+                            $(".chat_form_button").attr("disabled", false);
+                        } else {
+                            window.__bot.chat_form_hide(element_form_jquery);
+                            window.__bot.user_verified = response_data.data.authentic_user
+                            window.__bot.process_messages(response_data.data.response_messages,
+                                0);
+                        }
+                        window.__bot.enable_reset_chat();
+                        window.__bot.awaiting_response = false;
+                    });
+                }
+            }
+            // init
+        });
+
+
+    </script>
+    <script type="text/javascript">
+
+    </script>
+</body>
+
+</html>
