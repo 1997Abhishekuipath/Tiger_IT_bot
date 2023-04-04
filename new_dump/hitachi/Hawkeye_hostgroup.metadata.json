@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"hitachi.Hawkeye_hostgroup"}],"uuid":"9a0c80a709e6472eb5f6ebf17f3dc12f","collectionName":"Hawkeye_hostgroup","type":"collection"}

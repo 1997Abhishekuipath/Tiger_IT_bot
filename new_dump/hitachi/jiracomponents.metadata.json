@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"hitachi.jiracomponents"}],"uuid":"075f00fde5ea483aace4a1b26071bca0","collectionName":"jiracomponents","type":"collection"}

@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"hitachi.IT_execution"}],"uuid":"144dd384565d42beb41fa413a2c28922","collectionName":"IT_execution","type":"collection"}

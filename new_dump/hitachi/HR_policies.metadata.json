@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"hitachi.HR_policies"}],"uuid":"b7f7dafe5b8f42cba43fdabd91dfe789","collectionName":"HR_policies","type":"collection"}

@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"hitachi.jiraticketstatus"}],"uuid":"23214a992f724b3997b91a3ff8202d8b","collectionName":"jiraticketstatus","type":"collection"}

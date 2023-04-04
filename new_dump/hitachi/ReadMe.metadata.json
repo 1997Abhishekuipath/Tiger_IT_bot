@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"hitachi.ReadMe"}],"uuid":"89bf6e68247b4b29ad1c8e5d3510f991","collectionName":"ReadMe","type":"collection"}

@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"hitachi.leaves_balance"}],"uuid":"f1735d8e619a434fb3ea19e3f9c390a5","collectionName":"leaves_balance","type":"collection"}
